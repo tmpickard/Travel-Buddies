@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Travel Dashboard</title>
+    </head>
+    <body>
+        <h1>Hello, {{ User.name }}!</h1>
+        <form action="/logout">
+            <input type="submit" value="log out">
+        </form>
+        <h3>Your Trip Schedules</h3>
+        <table>
+            <th>
+                <tr><h7>Destination |</h7></tr>
+                <tr><h7> Travel Start Time |</h7></tr>
+                <tr><h7> Travel End Time |</h7></tr>
+                <tr><h7> Plan</h7></tr><br>
+            </th>
+            {% for Destination in committed_plans %}
+                <th>
+                    <tr><a href="/travels/destination/{{Destination.id}}">{{ Destination.destination }}</a>&emsp;</tr>
+                    <tr>{{ Destination.startdate }}&emsp;</tr>
+                    <tr>{{ Destination.enddate }}&emsp;</tr>
+                    <tr>{{ Destination.description }}</tr><br>
+                    <tr>{{ User.participants_joined.name }}</tr><br>
+                </th>
+            {% endfor %}
+        </table>
+        <h3>Other User's Travel Plans</h3>
+        <table>
+            <th>
+                <tr><h7>Name |</h7></tr>
+                <tr><h7> Destination |</h7></tr>
+                <tr><h7> Travel Start Time |</h7></tr>
+                <tr><h7> Travel End Time |</h7></tr>
+                <tr><h7> Do You Want To Join?</h7></tr><br>
+            </th>
+            {% for Destination in uncommitted_plans %}
+                <th>
+                    <tr>&emsp;{{ Destination.creator.name }}&emsp;</tr>
+                    <tr><a href="/travels/destination/{{Destination.creator.id}}">{{ Destination.destination }}</a>&emsp;</tr>
+                    <tr>{{ Destination.startdate }}&emsp;</tr>
+                    <tr>{{ Destination.enddate }}&emsp;</tr>
+                    <form action="/travels/join" method="post">
+                        {% csrf_token %}
+                    <tr><button href="/travels/join">Join</button></tr><br>
+                    <input type="hidden" name="destination_id" value="{{ Destination.id }}">
+                </th>
+            </form>
+            {% endfor %}
+        </table>
+        <a href="/travels/add" method="post">Add Travel Plan</a>
+    </body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>Login/Registration</title>
+        <style>
+            #wrapper{
+                background: rgb(198, 198, 255);
+                width: 970px;
+                padding: 5px;
+            }
+            .window{
+                background: linear-gradient(red, rgb(107, 107, 255));
+                width: 33%;
+                height: 260px;
+                padding: 0px;
+                display: inline-block;
+                vertical-align: top;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class="window">
+                <h1>Registration</h1>
+                <form action="/register" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <th><label for="Name">Name:</label></th>
+                            <th><input type="text" name="name"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="Alias">Alias:</label></th>
+                            <th><input type="text" name="alias"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="email">Email:</label></th>
+                            <th><input type="text" name="email"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="password">Password:</label></th>
+                            <th><input type="text" name="password"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="confirm">Confirm PW:</label></th>
+                            <th><input type="text" name="confirm_pw"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="birthday">Date of Birth:</label></th>
+                            <th><input type="date" name="bday"></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th><input type="submit" value="register"></th>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="window">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <div class="window">
+                <h1>Login</h1>
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <th><label for="email">Email:</label></th>
+                            <th><input type="text" name="email"></th>
+                        </tr>
+                        <tr>
+                            <th><label for="password">Password:</label></th>
+                            <th><input type="text" name="password"></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th><input type="submit" value="register"></th>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

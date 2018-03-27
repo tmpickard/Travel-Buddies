@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Destination</title>
+        <style>
+            #wrapper{
+                width: 970px;
+                background-color: rgb(255, 255, 206);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <a href="/travels">Home</a>
+            <a href="/logout">Logout</a>
+            <h1>{{ Destination.destination }}</h1>
+                <ul>
+                    <li>Planned by: {{ Destination.creator.name }} {{ Destination.creator.alias }}</li>
+                    <li>Description: {{ Destination.description }}</li>
+                    <li>Travel Date From: {{ Destination.startdate }}</li>
+                    <li>Travel Date To: {{ Destination.enddate }}</li>
+                </ul><br>
+            <br>
+            <h2>Other users' joining the trip:</h2>
+                <ul>
+                    {% for joiner in Destination.joiners.all %}
+                    <li>{{ joiner.name }}</li>
+                    {% endfor %}
+                </ul>
+        </div>
+    </body>
+</html>
