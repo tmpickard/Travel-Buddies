@@ -5,7 +5,8 @@ from time import gmtime, strftime
 from datetime import datetime
 
 def index(request):
-
+    if request.session['user_id'] == ''
+        redirect ('/')
     context = {
         'User': User.objects.get(id=request.session['user_id']),
         'committed_plans': Destination.objects.filter(joiners=request.session['user_id']),
